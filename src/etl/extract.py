@@ -3,14 +3,12 @@
 upstream = None
 
 
-# +
-import requests 
-import pandas as pd
 import json
 import duckdb
-
+import pandas as pd
+import requests
 # +
-def extract_data(url):
+def extract_data(url: str) -> pd.DataFrame:
     """Extract data from URL and return a dataframe"""
     response = requests.get(url)
     if response.status_code == 200:
@@ -31,8 +29,9 @@ def save_to_duckdb(df, table_name, db_path):
 if __name__ == "__main__":
 
     # Extract data from URL
-    url = "https://data.cityofnewyork.us/resource/erm2-nwe9.json"
-    df = extract_data(url)
+    # Source : https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9
+    data_url = "https://data.cityofnewyork.us/resource/erm2-nwe9.json"
+    df = extract_data(data_url)
     
     # Save to duckdb
     db_path = "data.duckdb"
