@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  fastapi:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: hactoberfest_2023_local_fastapi
+    container_name: hactoberfest_2023_local_fastapi
+    volumes:
+      - .:/src
+    env_file:
+      - ./.envs/environment_vars.txt
+    ports:
+      - "8000:8000"
+    # command: /start
+
