@@ -15,7 +15,7 @@ RUN poetry lock
 RUN poetry install
 
 # Copy the .env file
-COPY .env .env
+# COPY .env .env
 
 # Copy the rest of the application code
 COPY . .
