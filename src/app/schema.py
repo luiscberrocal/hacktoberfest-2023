@@ -9,7 +9,7 @@ class Location(BaseModel):
     human_address: str
 
 
-class Model(BaseModel):
+class Incident(BaseModel):
     unique_key: str
     created_date: str
     agency: str
