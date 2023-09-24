@@ -7,14 +7,27 @@ import json
 import duckdb
 import pandas as pd
 import requests
+from time import time
 # +
-def extract_data(url: str) -> pd.DataFrame:
+def extract_data(url: str, max_page_count: int =10, page_size:int=2_000) -> pd.DataFrame:
     """Extract data from URL and return a dataframe"""
-    response = requests.get(url)
-    if response.status_code == 200:
-        return pd.DataFrame(json.loads(response.content))
-    else:
-        raise Exception(f"Error retrieving data from {url}")
+
+    for offset in range(max_page_count):
+        start = time()
+        paged_url = f'{url}?limit={page_size}&offset={offset}'
+        response = requests.get(paged_url)
+        d_df = None
+        if response.status_code == 200:
+            if d_df is None:
+                d_df = pd.DataFrame(json.loads(response.content))
+            else:
+                d_df.append(json.loads(response.content))
+            elapsed = start = time()
+            print(f'Url: {paged_url} time: {elapsed:,.2f} seconds')
+        else:
+            raise Exception(f"Error retrieving data from {url}")
+        return d_df
+
 
 # +
 # write a function that saves a dataframe to duckdb
