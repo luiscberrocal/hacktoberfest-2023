@@ -4,29 +4,39 @@ upstream = None
 
 
 import json
+from time import time
+
 import duckdb
 import pandas as pd
 import requests
-from time import time
-# +
-def extract_data(url: str, max_page_count: int =10, page_size:int=2_000) -> pd.DataFrame:
-    """Extract data from URL and return a dataframe"""
 
-    for offset in range(max_page_count):
+
+# +
+def extract_data(url: str, max_page_count: int = 3, page_size: int = 2_000) -> pd.DataFrame:
+    """Extract data from URL and return a dataframe"""
+    d_df = None
+    print('Started extractoion')
+    for page in range(max_page_count):
+        offset = page * page_size
         start = time()
-        paged_url = f'{url}?limit={page_size}&offset={offset}'
+        paged_url = f'{url}?$limit={page_size}&$offset={offset}'
+        # print(f'Calling {paged_url}')
         response = requests.get(paged_url)
-        d_df = None
+        elapsed = time() - start
+        print(f'Url: {paged_url} time: {elapsed:,.2f} seconds')
         if response.status_code == 200:
             if d_df is None:
                 d_df = pd.DataFrame(json.loads(response.content))
             else:
-                d_df.append(json.loads(response.content))
-            elapsed = start = time()
-            print(f'Url: {paged_url} time: {elapsed:,.2f} seconds')
+                # pos = len(d_df)
+                # d_df.loc[pos] = json.loads(response.content)
+                id_df = pd.DataFrame(json.loads(response.content))
+                d_df = pd.concat([d_df, id_df])
+
         else:
-            raise Exception(f"Error retrieving data from {url}")
-        return d_df
+            error_message = f'Error calling {paged_url}. Status code {response.status_code} error: {response.content}'
+            raise Exception(error_message)
+    return d_df
 
 
 # +
@@ -40,6 +50,7 @@ def save_to_duckdb(df, table_name, db_path):
 
 # +
 if __name__ == "__main__":
+    duckdb.default_connection.execute("SET GLOBAL pandas_analyze_sample=100000")
 
     # Extract data from URL
     # Source : https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9
@@ -47,7 +58,7 @@ if __name__ == "__main__":
     df = extract_data(data_url)
     
     # Save to duckdb
-    db_path = "data.duckdb"
     table_name = "nycitydata"
+    db_path = f"{table_name}.duckdb"
     save_to_duckdb(df, table_name, db_path)
 
