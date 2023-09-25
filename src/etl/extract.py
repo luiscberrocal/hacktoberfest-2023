@@ -61,17 +61,17 @@ if __name__ == "__main__":
     data_url = "https://data.cityofnewyork.us/resource/erm2-nwe9.json"
     df = extract_data(data_url)
 
-    table_name = "nycitydata"
+    table = "nycitydata"
 
     # Saving intermediate Parquet
     print('Saving parquet file')
-    parquet_file = data_folder / f'{table_name}.parquet'
+    parquet_file = data_folder / f'{table}.parquet'
     if not parquet_file.exists():
         df.to_parquet(parquet_file)
 
     # Save to duckdb
-    db_path = data_folder / f"{table_name}.duckdb"
+    db_path = data_folder / f"{table}.duckdb"
     if delete_if_exists and db_path.exists():
         db_path.unlink()
 
-    save_to_duckdb(df, table_name, str(db_path))
+    save_to_duckdb(df, table, str(db_path))
