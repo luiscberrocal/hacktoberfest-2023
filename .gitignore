@@ -178,3 +178,4 @@ src/products/*
 .idea/
 
 .envs
+src/data/

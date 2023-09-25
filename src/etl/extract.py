@@ -1,9 +1,10 @@
 # + tags=["parameters"]
 # declare a list tasks whose products you want to use as inputs
+
 upstream = None
 
-
 import json
+from pathlib import Path
 from time import time
 
 import duckdb
@@ -41,24 +42,36 @@ def extract_data(url: str, max_page_count: int = 3, page_size: int = 2_000) -> p
 
 # +
 # write a function that saves a dataframe to duckdb
-def save_to_duckdb(df, table_name, db_path):
+def save_to_duckdb(df: pd.DataFrame, table_name: str, db_path: str) -> None:
     """Save dataframe to duckdb"""
     conn = duckdb.connect(db_path)
     conn.register('df', df)
     conn.execute(f"CREATE TABLE {table_name} AS SELECT * FROM df")
     conn.close()
 
+
 # +
 if __name__ == "__main__":
+    delete_if_exists = True
+    data_folder = Path(__file__).parent.parent / 'data'
     duckdb.default_connection.execute("SET GLOBAL pandas_analyze_sample=100000")
 
     # Extract data from URL
     # Source : https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9
     data_url = "https://data.cityofnewyork.us/resource/erm2-nwe9.json"
     df = extract_data(data_url)
-    
-    # Save to duckdb
-    table_name = "nycitydata"
-    db_path = f"{table_name}.duckdb"
-    save_to_duckdb(df, table_name, db_path)
 
+    table = "nycitydata"
+
+    # Saving intermediate Parquet
+    print('Saving parquet file')
+    parquet_file = data_folder / f'{table}.parquet'
+    if not parquet_file.exists():
+        df.to_parquet(parquet_file)
+
+    # Save to duckdb
+    db_path = data_folder / f"{table}.duckdb"
+    if delete_if_exists and db_path.exists():
+        db_path.unlink()
+
+    save_to_duckdb(df, table, str(db_path))
