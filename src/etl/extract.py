@@ -1,7 +1,9 @@
 # + tags=["parameters"]
 # declare a list tasks whose products you want to use as inputs
+
 upstream = None
 
+from pathlib import Path
 
 import json
 from time import time
@@ -50,15 +52,25 @@ def save_to_duckdb(df, table_name, db_path):
 
 # +
 if __name__ == "__main__":
+    delete_if_exists = True
+    data_folder = Path(__file__).parent / 'data'
     duckdb.default_connection.execute("SET GLOBAL pandas_analyze_sample=100000")
 
     # Extract data from URL
     # Source : https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9
     data_url = "https://data.cityofnewyork.us/resource/erm2-nwe9.json"
     df = extract_data(data_url)
+
+    table_name = "nycitydata"
+
+    # Saving intermediate Parquet
+    parquet_file = data_folder / f'{table_name}.parquet'
+    df.to_parquet()
     
     # Save to duckdb
-    table_name = "nycitydata"
-    db_path = f"{table_name}.duckdb"
-    save_to_duckdb(df, table_name, db_path)
+    db_path =  data_folder / f"{table_name}.duckdb"
+    if delete_if_exists and db_path.exists():
+        db_path.unlink()
+
+    save_to_duckdb(df, table_name, db_path.root)
 
