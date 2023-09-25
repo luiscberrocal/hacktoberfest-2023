@@ -64,8 +64,9 @@ if __name__ == "__main__":
     table_name = "nycitydata"
 
     # Saving intermediate Parquet
+    print('Saving parquet file')
     parquet_file = data_folder / f'{table_name}.parquet'
-    df.to_parquet()
+    df.to_parquet(parquet_file)
     
     # Save to duckdb
     db_path =  data_folder / f"{table_name}.duckdb"
