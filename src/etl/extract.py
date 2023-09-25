@@ -3,9 +3,8 @@
 
 upstream = None
 
-from pathlib import Path
-
 import json
+from pathlib import Path
 from time import time
 
 import duckdb
@@ -43,17 +42,18 @@ def extract_data(url: str, max_page_count: int = 3, page_size: int = 2_000) -> p
 
 # +
 # write a function that saves a dataframe to duckdb
-def save_to_duckdb(df, table_name, db_path):
+def save_to_duckdb(df: pd.DataFrame, table_name: str, db_path: str) -> None:
     """Save dataframe to duckdb"""
     conn = duckdb.connect(db_path)
     conn.register('df', df)
     conn.execute(f"CREATE TABLE {table_name} AS SELECT * FROM df")
     conn.close()
 
+
 # +
 if __name__ == "__main__":
     delete_if_exists = True
-    data_folder = Path(__file__).parent / 'data'
+    data_folder = Path(__file__).parent.parent / 'data'
     duckdb.default_connection.execute("SET GLOBAL pandas_analyze_sample=100000")
 
     # Extract data from URL
@@ -66,12 +66,12 @@ if __name__ == "__main__":
     # Saving intermediate Parquet
     print('Saving parquet file')
     parquet_file = data_folder / f'{table_name}.parquet'
-    df.to_parquet(parquet_file)
-    
+    if not parquet_file.exists():
+        df.to_parquet(parquet_file)
+
     # Save to duckdb
-    db_path =  data_folder / f"{table_name}.duckdb"
+    db_path = data_folder / f"{table_name}.duckdb"
     if delete_if_exists and db_path.exists():
         db_path.unlink()
 
-    save_to_duckdb(df, table_name, db_path.root)
-
+    save_to_duckdb(df, table_name, str(db_path))
