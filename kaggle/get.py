@@ -18,7 +18,7 @@ def download_dataset(dataset_name: str, download_folder: Path) -> Path:
 
 if __name__ == '__main__':
     #  kaggle datasets download joebeachcapital/house-prices
-    dataset = 'joebeachcapital/house-prices'
+    dataset = 'joebeachcapital/house-prices-2001-2020'
     data_folder = Path(__file__).parent / 'data'
     data_folder.mkdir(exist_ok=True)
 
