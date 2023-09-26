@@ -179,3 +179,4 @@ src/products/*
 
 .envs
 src/data/
+/kaggle/data/
