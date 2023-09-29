@@ -1,0 +1,5 @@
+pandas
+seaborn
+matplotlib
+numpy
+jupyter==1.0.0
