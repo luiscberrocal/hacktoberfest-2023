@@ -6,6 +6,7 @@ from kaggle.terminal_commands import run_commands
 
 
 def configure_kaggle(envs_folder: Path):
+    """Copy kaggle.json to ~/.kaggle in order to run kaggle commands."""
     envs_file = envs_folder / 'kaggle.json'
     if not envs_file.exists():
         raise Exception('Kaggle configuration file not found')
