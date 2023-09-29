@@ -43,7 +43,7 @@ if __name__ == '__main__':
     # ds_name = 'california-housing-prices-data-extra-features'
     ds_owner = 'akash14'
     ds_name = 'house-price-dataset'
-    data_folder = Path(__file__).parent / 'data'
+    data_folder = settings.DATA_FOLDER
     data_folder.mkdir(exist_ok=True)
 
     file = download_dataset(owner=ds_owner, dataset_name=ds_name, download_folder=data_folder)
