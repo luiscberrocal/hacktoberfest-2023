@@ -39,8 +39,10 @@ def download_dataset(owner: str, dataset_name: str, download_folder: Path) -> Pa
 if __name__ == '__main__':
     #  kaggle datasets download joebeachcapital/house-prices
     configure_kaggle(settings.ENVS_FOLDER)
-    ds_owner = 'fedesoriano'
-    ds_name = 'california-housing-prices-data-extra-features'
+    # ds_owner = 'fedesoriano'
+    # ds_name = 'california-housing-prices-data-extra-features'
+    ds_owner = 'akash14'
+    ds_name = 'house-price-dataset'
     data_folder = Path(__file__).parent / 'data'
     data_folder.mkdir(exist_ok=True)
 
