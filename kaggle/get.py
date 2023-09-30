@@ -1,3 +1,8 @@
+# + tags=["parameters"]
+# declare a list tasks whose products you want to use as inputs
+
+upstream = None
+
 import re
 import shutil
 from pathlib import Path
@@ -43,6 +48,13 @@ def download_dataset(owner: str, dataset_name: str, download_folder: Path) -> Pa
             print(e)
 
 
+def find_csv_file(folder: Path, csv_name: str) -> Path:
+    csvs = folder.glob('**/*.csv')
+    for csv in csvs:
+        if csv.name == csv_name:
+            return csv
+
+
 if __name__ == '__main__':
     #  kaggle datasets download joebeachcapital/house-prices
     configure_kaggle(settings.ENVS_FOLDER)
@@ -55,3 +67,5 @@ if __name__ == '__main__':
 
     fldr = download_dataset(owner=ds_owner, dataset_name=ds_name, download_folder=data_folder)
     print(f'Data folder: {fldr}')
+    csv_file = find_csv_file(fldr, 'Train.csv')
+    print(f'CSV: {csv_file}')
