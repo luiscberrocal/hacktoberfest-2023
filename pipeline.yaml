@@ -2,4 +2,7 @@ tasks:
   - source: kaggle/01-get.py
     product:
       nb: kaggle/products/extract-pipeline.ipynb
-  
+
+  - source: kaggle/02-cleanup.py
+    product:
+      nb: kaggle/products/cleanup.ipynb
