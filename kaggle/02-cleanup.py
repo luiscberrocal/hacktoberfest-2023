@@ -29,3 +29,5 @@ df = df.rename(columns=renamed_mapping)
 df.info()
 
 # %%
+
+df.to_csv(product['clean_csv'])
