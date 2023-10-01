@@ -1,5 +1,7 @@
 # %% tags=["parameters"]
 # declare a list tasks whose products you want to use as inputs
+import pandas as pd
+
 upstream = None
 
 
@@ -81,7 +83,9 @@ data_folder.mkdir(exist_ok=True)
 fldr = download_dataset(owner=ds_owner, dataset_name=ds_name, download_folder=data_folder)
 print(f'Data folder: {fldr}')
 csv_file = find_csv_file(fldr, 'Train.csv')
-product['csv_file'] = csv_file
+df = pd.read_csv(csv_file)
+df.to_csv(product['csv_file'])
+
 print(f'CSV: {csv_file}')
 
 

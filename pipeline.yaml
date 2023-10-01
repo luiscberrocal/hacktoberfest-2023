@@ -2,6 +2,7 @@ tasks:
   - source: kaggle/01-get.py
     product:
       nb: kaggle/products/extract-pipeline.ipynb
+      csv_file: kaggle/data/house_prices.csv
 
   - source: kaggle/02-cleanup.py
     product:
