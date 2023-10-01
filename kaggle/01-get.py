@@ -8,7 +8,7 @@ upstream = None
 # declare a list tasks whose products you want to use as inputs
 
 upstream = None
-product = None
+# product = None
 
 # %%
 import re
@@ -48,14 +48,17 @@ def download_dataset(owner: str, dataset_name: str, download_folder: Path) -> Pa
     regexp = re.compile(r"Downloading\s([\w-]+\.zip)\sto\s(.+)")
     match = regexp.match(results[0])
     # print('>>', results[0])  # , match.groups(2))
-
-    if match:
-        return Path(match.group(2))
     if len(errors) > 1:
         print('-' * 50)
         print('errors')
         for e in errors:
             print(e)
+
+    if match:
+        return Path(match.group(2))
+    else:
+        error_msg = f'{results}'
+        raise Exception(error_msg)
 
 
 # %%

@@ -1,5 +1,5 @@
 tasks:
-  - source: kaggle/get.py
+  - source: kaggle/01-get.py
     product:
       nb: kaggle/products/extract-pipeline.ipynb
-      csv_file: csv_file
+  
