@@ -17,6 +17,7 @@ df.info()
 df.isna().sum()
 
 ## %%
+# Rename columns to snake case
 renamed_mapping = {}
 for c in df.columns:
     new_c_name = re.sub('[^0-9a-zA-Z_]+', '', c)
