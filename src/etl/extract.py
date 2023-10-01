@@ -16,7 +16,7 @@ import requests
 def extract_data(url: str, max_page_count: int = 3, page_size: int = 2_000) -> pd.DataFrame:
     """Extract data from URL and return a dataframe"""
     d_df = None
-    print('Started extractoion')
+    print('Started extraction')
     for page in range(max_page_count):
         offset = page * page_size
         start = time()
