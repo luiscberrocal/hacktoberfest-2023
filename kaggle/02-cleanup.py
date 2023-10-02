@@ -33,9 +33,10 @@ def get_city(value):
     parts = value.split(',')
     return parts[-1:][0]
 
-df['city'] = df['address'].apply(get_city)
+# Too many cities, heatmap not working.
+# df['city'] = df['address'].apply(get_city)
 
-df['city'].value_counts()
+# df['city'].value_counts()
 
 # %%
 df = df.drop(columns=['address'])
@@ -47,7 +48,8 @@ df['posted_by'].value_counts()
 df['bhk_or_rk'].value_counts()
 
 # %%
-df = pd.get_dummies(df, columns=['posted_by', 'bhk_or_rk', 'city'])
+# df = pd.get_dummies(df, columns=['posted_by', 'bhk_or_rk', 'city'])
+df = pd.get_dummies(df, columns=['posted_by', 'bhk_or_rk'])
 
 # %%
 df.head()
