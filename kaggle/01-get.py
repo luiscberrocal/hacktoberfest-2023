@@ -1,21 +1,15 @@
 # %% tags=["parameters"]
 # declare a list tasks whose products you want to use as inputs
-import pandas as pd
 
 upstream = None
 
-
-# %%
-# + tags=["parameters"]
-# declare a list tasks whose products you want to use as inputs
-
-upstream = None
-# product = None
 
 # %%
 import re
 import shutil
 from pathlib import Path
+
+import pandas as pd
 
 from kaggle import settings
 from kaggle.terminal_commands import run_commands
