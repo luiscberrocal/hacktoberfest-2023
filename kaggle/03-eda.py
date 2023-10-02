@@ -5,6 +5,8 @@ product = None
 
 # %%
 import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
 # log convert non gaussian columns?
 # df['x'] = np.log(df['x'] +1)
 # df.hist()
@@ -17,3 +19,7 @@ df.head()
 # %%
 df.corr()
 
+# %%
+plt.figure(figsize=(18, 8))
+sns.heatmap(df.corr(), annot=True, cmap='YlGnBu')
+plt.show()

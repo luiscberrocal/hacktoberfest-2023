@@ -16,7 +16,7 @@ df.info()
 # %%
 df.isna().sum()
 
-## %%
+# %%
 # Rename columns to snake case
 renamed_mapping = {}
 for c in df.columns:
@@ -27,6 +27,18 @@ renamed_mapping['targetprice_in_lacs'] = 'target_price_in_lacs'
 df = df.rename(columns=renamed_mapping)
 
 df.info()
+# %%
+# Extracting cities from address
+def get_city(value):
+    parts = value.split(',')
+    return parts[-1:][0]
+
+df['city'] = df['address'].apply(get_city)
+
+df['city'].value_counts()
+
+# %%
+df = df.drop(columns=['address'])
 
 # %%
 df['posted_by'].value_counts()
@@ -35,7 +47,7 @@ df['posted_by'].value_counts()
 df['bhk_or_rk'].value_counts()
 
 # %%
-df = pd.get_dummies(df, columns=['posted_by', 'bhk_or_rk'])
+df = pd.get_dummies(df, columns=['posted_by', 'bhk_or_rk', 'city'])
 
 # %%
 df.head()
