@@ -30,4 +30,4 @@ df.info()
 
 # %%
 
-df.to_csv(product['clean_csv'])
+df.to_csv(product['clean_csv'], index=False)

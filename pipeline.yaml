@@ -8,7 +8,7 @@ tasks:
     product:
       nb: kaggle/products/cleanup.ipynb
       clean_csv: kaggle/data/house_prices_clean.csv
-  - source: kaggle/03-eda.py
-    product:
-      nb: kaggle/products/eda.ipynb
-      clean_csv: kaggle/data/house_prices_clean.csv
+#   - source: kaggle/03-eda.py
+#     product:
+#       nb: kaggle/products/eda.ipynb
+#       clean_csv: kaggle/data/house_prices_clean.csv
