@@ -28,6 +28,12 @@ df = df.rename(columns=renamed_mapping)
 
 df.info()
 
+
+# %%
+# 1. hot shoe encoding
+# 2. Drop encoded columns
+# 3. Extract city
+# 4.
 # %%
 
 df.to_csv(product['clean_csv'], index=False)
