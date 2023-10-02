@@ -23,3 +23,8 @@ df.corr()
 plt.figure(figsize=(18, 8))
 sns.heatmap(df.corr(), annot=True, cmap='YlGnBu')
 plt.show()
+
+# %%
+df.hist(figsize=(12,9))
+plt.tight_layout()
+plt.show()
