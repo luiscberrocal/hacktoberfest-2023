@@ -2,6 +2,9 @@
 upstream = ['01-get']
 product = None
 
+# %%
+import warnings
+warnings.filterwarnings('ignore')
 
 # %%
 import re

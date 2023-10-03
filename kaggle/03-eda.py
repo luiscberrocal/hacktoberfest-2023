@@ -3,10 +3,14 @@
 upstream = ['02-cleanup']
 product = None
 
-import matplotlib.pyplot as plt
+# %%
+import warnings
+warnings.filterwarnings('ignore')
+
 # %%
 import pandas as pd
 import seaborn as sns
+import matplotlib.pyplot as plt
 
 # log convert non gaussian columns?
 # df['x'] = np.log(df['x'] +1)
