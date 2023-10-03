@@ -2,9 +2,9 @@
 upstream = ['01-get']
 product = None
 
-import re
 
 # %%
+import re
 import pandas as pd
 
 # %%

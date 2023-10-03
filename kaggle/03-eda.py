@@ -3,10 +3,11 @@
 upstream = ['02-cleanup']
 product = None
 
+import matplotlib.pyplot as plt
 # %%
 import pandas as pd
 import seaborn as sns
-import matplotlib.pyplot as plt
+
 # log convert non gaussian columns?
 # df['x'] = np.log(df['x'] +1)
 # df.hist()
@@ -25,10 +26,10 @@ sns.heatmap(df.corr(), annot=True, cmap='YlGnBu')
 plt.show()
 
 # %%
-sns.scatterplot(data=df, x='latitude', y='longitude', hue='targetprice_in_lacs', palette='flare')
+plt.figure(figsize=(10, 8))
+sns.scatterplot(data=df, x='longitude', y='latitude', hue='targetprice_in_lacs', palette='flare')
 plt.show()
-
 # %%
-df.hist(figsize=(12,9))
+df.hist(figsize=(12, 9))
 plt.tight_layout()
 plt.show()
