@@ -29,6 +29,16 @@ renamed_mapping['targetprice_in_lacs'] = 'target_price_in_lacs'
 
 df = df.rename(columns=renamed_mapping)
 
+# %%
+# Convert price to dolllars 1 lac == 1,397
+df['price'] = df['targetprice_in_lacs'] * 1_397
+
+# Convert square_ft to square meters
+df['area_m2'] = df['square_ft'] * 0.092903
+
+# %%
+df = df.drop(columns=['square_ft', 'targetprice_in_lacs'])
+
 df.info()
 # %%
 # Extracting cities from address

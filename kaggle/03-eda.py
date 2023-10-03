@@ -31,7 +31,7 @@ plt.show()
 
 # %%
 plt.figure(figsize=(10, 8))
-sns.scatterplot(data=df, x='longitude', y='latitude', hue='targetprice_in_lacs', palette='flare')
+sns.scatterplot(data=df, x='longitude', y='latitude', hue='price', palette='flare')
 plt.show()
 # %%
 df.hist(figsize=(12, 9))

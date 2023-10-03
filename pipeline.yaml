@@ -11,3 +11,8 @@ tasks:
   - source: kaggle/03-eda.py
     product:
       nb: kaggle/products/eda.ipynb
+  - source: kaggle/04-transform.py
+    product:
+      nb: kaggle/products/transform.ipynb
+      train_data: kaggle/data/house_prices_train.csv
+      test_data: kaggle/data/house_prices_test.csv
