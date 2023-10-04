@@ -20,3 +20,7 @@ tasks:
       nb: kaggle/products/05_split.ipynb
       train_data: kaggle/data/house_prices_train.csv
       test_data: kaggle/data/house_prices_test.csv
+  - source: kaggle/06-linear_regressions.py
+    product:
+      nb: kaggle/products/05_linear_regression.ipynb
+      model_file: kaggle/data/linear_regression.pickle
