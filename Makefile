@@ -1,4 +1,4 @@
 clean: ## remove build artifacts
 	rm -fr kaggle/products
-run: clean
+run:
 	ploomber build

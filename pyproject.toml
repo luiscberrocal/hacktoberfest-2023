@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hacktoberfest-2023-project"
-version = "0.2.3"
+version = "0.2.4"
 description = "ETL/RAG pipelines with Ploomber"
 authors = ["Your Name <you@example.com>"]
 license = "Apache 2.0"
