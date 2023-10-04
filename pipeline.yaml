@@ -13,7 +13,7 @@ tasks:
       nb: kaggle/products/eda.ipynb
   - source: kaggle/04-transform.py
     product:
-      nb: kaggle/products/transform.ipynb
+      nb: kaggle/products/04_transform.ipynb
       transformed_csv: kaggle/data/house_prices_transformed.csv
   - source: kaggle/05-split.py
     product:
@@ -22,5 +22,5 @@ tasks:
       test_data: kaggle/data/house_prices_test.csv
   - source: kaggle/06-linear_regressions.py
     product:
-      nb: kaggle/products/05_linear_regression.ipynb
+      nb: kaggle/products/06_linear_regression.ipynb
       model_file: kaggle/data/linear_regression.pickle
