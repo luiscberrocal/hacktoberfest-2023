@@ -22,5 +22,5 @@ tasks:
       test_data: src/data/house_prices_test.csv
   - source: src/scripts/06-linear_regressions.py
     product:
-      nb: src/products/06_linear_regression.ipynb
+      nb: src/products/06-linear_regression.ipynb
       model_file: src/data/linear_regression.pickle

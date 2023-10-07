@@ -28,7 +28,7 @@ product = None
 
 # %%
 import pickle
-
+from pathlib import Path
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
@@ -74,6 +74,8 @@ score = linear_reg.score(X_test, y_test)
 print(score)
 
 # %%
-
-with open('filename.pkl', 'wb') as f:
+model_file = Path(product['model_file'])
+with open(model_file, 'wb') as f:
     pickle.dump(product['model_file'], f)
+
+print(f'Model file: {model_file} exists: {model_file.exists()}')
