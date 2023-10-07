@@ -10,6 +10,8 @@ warnings.filterwarnings('ignore')
 # %%
 import re
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # %%
 df = pd.read_csv(upstream['01-get']['csv_file'])
@@ -83,10 +85,29 @@ for c in df.columns:
 df.info()
 
 # %%
-# 1. hot shoe encoding
-# 2. Drop encoded columns
-# 3. Extract city
-# 4.
-# %%
 
 df.to_csv(product['clean_csv'], index=False)
+
+# %%
+sns.scatterplot(data=df, x="price", y="area_m2")
+plt.show()
+
+# %%
+# There seem to be outliers in price
+
+# Z score
+from scipy import stats
+import numpy as np
+
+df['z_score'] = np.abs(stats.zscore(df['price']))
+
+
+# %%
+outlier_index = df.loc[df['z_score'] > 3.0].index
+
+df = df.drop(outlier_index)
+print(df.shape)
+
+# %%
+sns.scatterplot(data=df, x="price", y="area_m2")
+plt.show()
