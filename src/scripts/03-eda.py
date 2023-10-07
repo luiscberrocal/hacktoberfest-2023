@@ -38,3 +38,4 @@ plt.show()
 df.hist(figsize=(12, 9))
 plt.tight_layout()
 plt.show()
+

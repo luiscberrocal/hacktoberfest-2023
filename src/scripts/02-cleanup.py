@@ -10,6 +10,8 @@ warnings.filterwarnings('ignore')
 # %%
 import re
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # %%
 df = pd.read_csv(upstream['01-get']['csv_file'])
@@ -83,10 +85,55 @@ for c in df.columns:
 df.info()
 
 # %%
-# 1. hot shoe encoding
-# 2. Drop encoded columns
-# 3. Extract city
-# 4.
-# %%
 
 df.to_csv(product['clean_csv'], index=False)
+
+# %%
+sns.scatterplot(data=df, x="price", y="area_m2")
+plt.title(f'Price vs Area before cleaning outliers (count {df.shape[0]:,})')
+plt.show()
+
+# %%
+# There seem to be outliers in price
+
+# Z score
+from scipy import stats
+import numpy as np
+
+df['z_score'] = np.abs(stats.zscore(df['price']))
+
+# %%
+''' Detection '''
+
+
+def clean_with_iqr(data_frame: pd.DataFrame, column: str) -> pd.DataFrame:
+    # IQR
+    # Calculate the upper and lower limits
+    Q1 = data_frame[column].quantile(0.25)
+    Q3 = data_frame[column].quantile(0.75)
+    IQR = Q3 - Q1
+    lower = Q1 - 1.5 * IQR
+    upper = Q3 + 1.5 * IQR
+
+    # Create arrays of Boolean values indicating the outlier rows
+    upper_array = np.where(data_frame[column] >= upper)[0]
+    lower_array = np.where(data_frame[column] <= lower)[0]
+
+    # Removing the outliers
+    data_frame.drop(index=upper_array, inplace=True)
+    data_frame.drop(index=lower_array, inplace=True)
+    return data_frame
+
+# %%
+# outlier_index = df.loc[df['z_score'] > 3.0].index
+# df = clean_with_iqr(data_frame=df, column='price')
+# df = clean_with_iqr(data_frame=df, column='area_m2')
+# df = df.drop(outlier_index)
+print(df.shape)
+out_area = df.loc[df['area_m2'] >= 10_000.00]
+df = df.drop(index=out_area.index)
+
+# %%
+sns.scatterplot(data=df, x="price", y="area_m2")
+plt.title(f'Price vs Area after cleaning outliers (count {df.shape[0]:,})')
+plt.show()
