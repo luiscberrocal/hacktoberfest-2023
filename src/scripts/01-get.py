@@ -11,8 +11,8 @@ from pathlib import Path
 import duckdb
 import pandas as pd
 
-from kaggle import settings
-from kaggle.terminal_commands import run_commands
+from src import settings
+from src.terminal_commands import run_commands
 
 
 # %%

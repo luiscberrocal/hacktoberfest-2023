@@ -26,8 +26,10 @@ upstream = ['05-split']
 # This is a placeholder, leave it as None
 product = None
 
-import matplotlib.pyplot as plt
 # %%
+import pickle
+
+import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 from sklearn.linear_model import LinearRegression
@@ -60,7 +62,6 @@ y_train = train_data['price']
 # %%
 X_test = test_data.drop(['price'], axis=1)
 y_test = test_data['price']
-# %%
 
 # %%
 linear_reg = LinearRegression()
@@ -71,3 +72,8 @@ linear_reg.fit(X_train, y_train)
 score = linear_reg.score(X_test, y_test)
 
 print(score)
+
+# %%
+
+with open('filename.pkl', 'wb') as f:
+    pickle.dump(product['model_file'], f)
