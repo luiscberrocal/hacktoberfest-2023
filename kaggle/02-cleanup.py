@@ -4,6 +4,7 @@ product = None
 
 # %%
 import warnings
+
 warnings.filterwarnings('ignore')
 
 # %%
@@ -40,11 +41,14 @@ df['area_m2'] = df['square_ft'] * 0.092903
 df = df.drop(columns=['square_ft', 'targetprice_in_lacs'])
 
 df.info()
+
+
 # %%
 # Extracting cities from address
 def get_city(value):
     parts = value.split(',')
     return parts[-1:][0]
+
 
 # Too many cities, heatmap not working.
 # df['city'] = df['address'].apply(get_city)

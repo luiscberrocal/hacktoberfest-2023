@@ -5,6 +5,7 @@ product = None
 
 # %%
 import warnings
+
 warnings.filterwarnings('ignore')
 
 # %%

@@ -3,7 +3,6 @@
 
 upstream = None
 
-
 # %%
 import re
 import shutil
@@ -23,6 +22,7 @@ def save_to_duckdb(df: pd.DataFrame, table_name: str, db_path: str) -> None:
     conn.register('df', df)
     conn.execute(f"CREATE OR REPLACE TABLE {table_name} AS SELECT * FROM df")
     conn.close()
+
 
 # %%
 def configure_kaggle(envs_folder: Path):

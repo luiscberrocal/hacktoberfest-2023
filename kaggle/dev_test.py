@@ -1,4 +1,3 @@
-
 def parse(sequence_str: str) -> str:
     key_mappings = {
         '0': ' ',
