@@ -3,16 +3,25 @@
 
 upstream = None
 
-
 # %%
 import re
 import shutil
 from pathlib import Path
 
+import duckdb
 import pandas as pd
 
-from kaggle import settings
-from kaggle.terminal_commands import run_commands
+from src import settings
+from src.terminal_commands import run_commands
+
+
+# %%
+def save_to_duckdb(df: pd.DataFrame, table_name: str, db_path: str) -> None:
+    """Save dataframe to duckdb"""
+    conn = duckdb.connect(db_path)
+    conn.register('df', df)
+    conn.execute(f"CREATE OR REPLACE TABLE {table_name} AS SELECT * FROM df")
+    conn.close()
 
 
 # %%
@@ -76,6 +85,7 @@ print(f'Data folder: {fldr}')
 csv_file = find_csv_file(fldr, 'Train.csv')
 df = pd.read_csv(csv_file)
 df.to_csv(product['csv_file'], index=False)
+save_to_duckdb(df=df, table_name='house_prices', db_path=product['database'])
 
 print(f'CSV: {csv_file}')
 

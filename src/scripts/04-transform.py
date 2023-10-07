@@ -17,7 +17,7 @@ df = pd.read_csv(upstream['02-cleanup']['clean_csv'])
 df.head()
 # %%
 # Scaling
-# Log tranform
+# df['bhk_no'] = np.log(df['bhk_no'] + 1)
 
 # %%
 df.to_csv(product['transformed_csv'], index=False)
