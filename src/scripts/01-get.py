@@ -1,6 +1,6 @@
 # %% tags=["parameters"]
 # declare a list tasks whose products you want to use as inputs
-
+table_name = ''
 upstream = None
 
 # %%
@@ -85,7 +85,7 @@ print(f'Data folder: {fldr}')
 csv_file = find_csv_file(fldr, 'Train.csv')
 df = pd.read_csv(csv_file)
 df.to_csv(product['csv_file'], index=False)
-save_to_duckdb(df=df, table_name='house_prices', db_path=product['database'])
+save_to_duckdb(df=df, table_name=table_name, db_path=product['database'])
 
 print(f'CSV: {csv_file}')
 
