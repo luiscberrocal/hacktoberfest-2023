@@ -28,7 +28,7 @@ renamed_mapping = {}
 for c in df.columns:
     new_c_name = re.sub('[^0-9a-zA-Z_]+', '', c)
     renamed_mapping[c] = new_c_name.lower()  # .replace(' ', '_').replace('(', '').replace(')', '')
-renamed_mapping['targetprice_in_lacs'] = 'target_price_in_lacs'
+# renamed_mapping['targetprice_in_lacs'] = 'target_price_in_lacs'
 
 df = df.rename(columns=renamed_mapping)
 
