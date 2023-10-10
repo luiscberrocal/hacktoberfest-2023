@@ -137,3 +137,7 @@ df = df.drop(index=out_area.index)
 sns.scatterplot(data=df, x="price", y="area_m2")
 plt.title(f'Price vs Area after cleaning outliers (count {df.shape[0]:,})')
 plt.show()
+
+# %%
+
+df.describe()
