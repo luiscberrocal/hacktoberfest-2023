@@ -5,6 +5,8 @@
 #     language: python
 #     name: python3
 # ---
+from src import settings
+from src.kaggle import configure_kaggle, download_dataset
 
 # Add description here
 #
@@ -25,7 +27,27 @@ upstream = None
 
 # This is a placeholder, leave it as None
 product = None
+table_name = None
+kaggle_owner = None
+kaggle_dataset_name = None
+
 
 
 # %%
 # your code here...
+configure_kaggle(settings.ENVS_FOLDER)
+#ds_owner = 'akash14'
+#ds_name = 'house-price-dataset'
+data_folder = settings.DATA_FOLDER
+data_folder.mkdir(exist_ok=True)
+fldr = download_dataset(owner=kaggle_owner, dataset_name=kaggle_dataset_name, download_folder=data_folder)
+print(f'Data folder: {fldr}')
+# csv_file = find_csv_file(fldr, 'Train.csv')
+# df = pd.read_csv(csv_file)
+# df.to_csv(product['csv_file'], index=False)
+# save_to_duckdb(df=df, table_name=table_name, db_path=product['database'])
+
+#print(f'CSV: {csv_file}')
+
+# %%
+# df.head()
