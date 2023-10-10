@@ -5,6 +5,8 @@
 #     language: python
 #     name: python3
 # ---
+from pathlib import Path
+
 from src import settings
 from src.kaggle import configure_kaggle, download_dataset
 
@@ -36,9 +38,7 @@ kaggle_dataset_name = None
 # %%
 # your code here...
 configure_kaggle(settings.ENVS_FOLDER)
-#ds_owner = 'akash14'
-#ds_name = 'house-price-dataset'
-data_folder = settings.DATA_FOLDER
+data_folder = Path(product['csv_file']).parent
 data_folder.mkdir(exist_ok=True)
 fldr = download_dataset(owner=kaggle_owner, dataset_name=kaggle_dataset_name, download_folder=data_folder)
 print(f'Data folder: {fldr}')
