@@ -4,6 +4,8 @@ tasks:
       nb: src/products/01-extract-pipeline.ipynb
       csv_file: src/data/house_prices.csv
       database: src/data/house_prices.duckdb
+    params:
+      table_name: '{{table_name}}'
   - source: src/scripts/02-cleanup.py
     product:
       nb: src/products/02-cleanup.ipynb

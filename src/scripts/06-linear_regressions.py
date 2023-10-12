@@ -71,7 +71,17 @@ linear_reg.fit(X_train, y_train)
 # %%
 score = linear_reg.score(X_test, y_test)
 
-print(score)
+print(f'R2 Score {score}')
+
+# %%
+#--Evaluation metrics for regression models
+from sklearn.metrics import mean_absolute_error as mae
+from sklearn.metrics import mean_squared_error as mse
+from sklearn.metrics import r2_score
+y_pred = linear_reg.predict(X_test)
+r2_linear = r2_score(y_test,y_pred)
+
+print(f'{r2_linear:=}')
 
 # %%
 model_file = Path(product['model_file'])

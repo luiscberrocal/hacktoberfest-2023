@@ -1,0 +1,30 @@
+tasks:
+  - source: scripts/s01_get.py
+    product:
+      nb: products/01-extract-pipeline.ipynb
+      csv_file: data/house_prices.csv
+      database: data/house_prices.duckdb
+    params:
+      table_name: '{{table_name}}'
+      kaggle_owner: '{{kaggle_owner}}'
+      kaggle_dataset_name: '{{kaggle_dataset_name}}'
+  # - source: scripts/s02_cleanup.py
+  #   product:
+  #     nb: products/02-cleanup.ipynb
+  #     clean_csv: data/house_prices_clean.csv
+  # - source: scripts/s03_eda.py
+  #   product:
+  #     nb: products/03-eda.ipynb
+  # - source: scripts/s04_transform.py
+  #   product:
+  #     nb: products/04-transform.ipynb
+  #     transformed_csv: data/house_prices_transformed.csv
+  # - source: scripts/s05_split.py
+  #   product:
+  #     nb: products/05-split.ipynb
+  #     train_data: data/house_prices_train.csv
+  #     test_data: data/house_prices_test.csv
+  # - source: scripts/s06_linear_regressions.py
+  #   product:
+  #     nb: products/06-linear_regression.ipynb
+  #     model_file: data/linear_regression.pickle

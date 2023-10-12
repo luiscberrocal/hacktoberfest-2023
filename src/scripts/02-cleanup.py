@@ -27,8 +27,7 @@ df.isna().sum()
 renamed_mapping = {}
 for c in df.columns:
     new_c_name = re.sub('[^0-9a-zA-Z_]+', '', c)
-    renamed_mapping[c] = new_c_name.lower()  # .replace(' ', '_').replace('(', '').replace(')', '')
-renamed_mapping['targetprice_in_lacs'] = 'target_price_in_lacs'
+    renamed_mapping[c] = new_c_name.lower()
 
 df = df.rename(columns=renamed_mapping)
 
@@ -137,3 +136,7 @@ df = df.drop(index=out_area.index)
 sns.scatterplot(data=df, x="price", y="area_m2")
 plt.title(f'Price vs Area after cleaning outliers (count {df.shape[0]:,})')
 plt.show()
+
+# %%
+
+df.describe()
