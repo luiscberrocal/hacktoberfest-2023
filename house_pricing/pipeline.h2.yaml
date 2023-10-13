@@ -9,10 +9,11 @@ tasks:
       kaggle_owner: '{{kaggle_owner}}'
       kaggle_dataset_name: '{{kaggle_dataset_name}}'
       kaggle_csv: '{{kaggle_csv}}'
-  # - source: scripts/s02_cleanup.py
-  #   product:
-  #     nb: products/02-cleanup.ipynb
-  #     clean_csv: data/house_prices_clean.csv
+  - source: scripts/s02_cleanup.py
+    product:
+      nb: products/02-cleanup.ipynb
+    params:
+      table_name: '{{dataset_name}}'
   # - source: scripts/s03_eda.py
   #   product:
   #     nb: products/03-eda.ipynb
