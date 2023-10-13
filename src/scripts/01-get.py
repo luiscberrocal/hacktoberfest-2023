@@ -1,13 +1,13 @@
 # %% tags=["parameters"]
 # declare a list tasks whose products you want to use as inputs
+from src.db import save_to_duckdb
+from src.handlers import find_csv_file
 
 table_name = ''
 upstream = None
 
 # %%
-from pathlib import Path
 
-import duckdb
 import pandas as pd
 
 from src import settings
@@ -15,20 +15,6 @@ from src import settings
 from src.kaggle import configure_kaggle, download_dataset
 
 # %%
-def save_to_duckdb(df: pd.DataFrame, table_name: str, db_path: str) -> None:
-    """Save dataframe to duckdb"""
-    conn = duckdb.connect(db_path)
-    conn.register('df', df)
-    conn.execute(f"CREATE OR REPLACE TABLE {table_name} AS SELECT * FROM df")
-    conn.close()
-
-
-# %%
-def find_csv_file(folder: Path, csv_name: str) -> Path:
-    csvs = folder.glob('**/*.csv')
-    for csv in csvs:
-        if csv.name == csv_name:
-            return csv
 
 
 # %%

@@ -2,12 +2,13 @@ tasks:
   - source: scripts/s01_get.py
     product:
       nb: products/01-extract-pipeline.ipynb
-      csv_file: data/house_prices.csv
-      database: data/house_prices.duckdb
+      csv_file: data/{{dataset_name}}_raw.csv
+      database: data/{{dataset_name}}.duckdb
     params:
-      table_name: '{{table_name}}'
+      table_name: '{{dataset_name}}'
       kaggle_owner: '{{kaggle_owner}}'
       kaggle_dataset_name: '{{kaggle_dataset_name}}'
+      kaggle_csv: '{{kaggle_csv}}'
   # - source: scripts/s02_cleanup.py
   #   product:
   #     nb: products/02-cleanup.ipynb
