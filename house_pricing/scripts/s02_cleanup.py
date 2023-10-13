@@ -6,6 +6,9 @@
 #     name: python3
 # ---
 from src.db import get_dataframe
+import re
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 # Add description here
 #
@@ -36,3 +39,28 @@ df = get_dataframe(duckdb_file=db_file, table_name=table_name)
 # %%
 df.shape
 
+# %%
+df.info()
+
+# %%
+renamed_mapping = {}
+for c in df.columns:
+    new_c_name = re.sub('[^0-9a-zA-Z_]+', '', c)
+    renamed_mapping[c] = new_c_name.lower()  
+
+df = df.rename(columns=renamed_mapping)
+
+df.info()
+
+# %%
+df.isna().sum()
+
+# %%
+df.hist(figsize=(12, 9))
+plt.tight_layout()
+plt.show()
+
+# %%
+plt.figure(figsize=(18, 8))
+sns.heatmap(df.corr(), annot=True, cmap='YlGnBu')
+plt.show()
