@@ -22,7 +22,8 @@ tasks:
       nb: products/04-transform.ipynb
       # transformed_csv: data/house_prices_transformed.csv
     params:
-      table_name: '{{dataset_name}}_transformed'
+      table_name: '{{dataset_name}}'
+      transformed_table_name: '{{dataset_name}}_transformed'
   # - source: scripts/s05_split.py
   #   product:
   #     nb: products/05-split.ipynb

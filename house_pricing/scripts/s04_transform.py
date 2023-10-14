@@ -5,6 +5,7 @@
 #     language: python
 #     name: python3
 # ---
+from src.db import get_dataframe, save_to_duckdb
 
 # Add description here
 #
@@ -26,6 +27,20 @@ upstream = ['s01_get']
 # This is a placeholder, leave it as None
 product = None
 table_name = None
+transformed_table_name = None
 
 # %%
 # your code here...
+db_file = upstream['s01_get']['database']
+df = get_dataframe(duckdb_file=db_file, table_name=table_name)
+
+# %%
+from sklearn.preprocessing import StandardScaler
+
+features =  df.columns # ["col1", "col2", "col3", "col4"]
+autoscaler = StandardScaler()
+df[features] = autoscaler.fit_transform(df[features])
+
+
+# %%
+save_to_duckdb(df=df, table_name=transformed_table_name, db_path=upstream['database'])
