@@ -21,11 +21,11 @@
 # %% tags=["parameters"]
 # If this task has dependencies, list them them here
 # (e.g. upstream = ['some_task']), otherwise leave as None.
-upstream = None
+upstream = ['s01_get']
 
 # This is a placeholder, leave it as None
 product = None
-
+table_name = None
 
 # %%
 # your code here...
