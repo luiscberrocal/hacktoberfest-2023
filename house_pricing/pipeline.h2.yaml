@@ -17,10 +17,12 @@ tasks:
   - source: scripts/s03_eda.py
     product:
       nb: products/03-eda.ipynb
-  # - source: scripts/s04_transform.py
-  #   product:
-  #     nb: products/04-transform.ipynb
-  #     transformed_csv: data/house_prices_transformed.csv
+  - source: scripts/s04_transform.py
+    product:
+      nb: products/04-transform.ipynb
+      transformed_csv: data/house_prices_transformed.csv
+      params:
+        table_name: '{{table_name}}_transformed'
   # - source: scripts/s05_split.py
   #   product:
   #     nb: products/05-split.ipynb
