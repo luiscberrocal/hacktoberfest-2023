@@ -14,9 +14,9 @@ tasks:
       nb: products/02-cleanup.ipynb
     params:
       table_name: '{{dataset_name}}'
-  # - source: scripts/s03_eda.py
-  #   product:
-  #     nb: products/03-eda.ipynb
+  - source: scripts/s03_eda.py
+    product:
+      nb: products/03-eda.ipynb
   # - source: scripts/s04_transform.py
   #   product:
   #     nb: products/04-transform.ipynb

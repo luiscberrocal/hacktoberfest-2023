@@ -5,7 +5,7 @@
 #     language: python
 #     name: python3
 # ---
-from src.db import get_dataframe
+from src.db import get_dataframe, save_to_duckdb
 import re
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -64,3 +64,6 @@ plt.show()
 plt.figure(figsize=(18, 8))
 sns.heatmap(df.corr(), annot=True, cmap='YlGnBu')
 plt.show()
+
+# %%
+save_to_duckdb(df=df, table_name=table_name, db_path=product['database'])
