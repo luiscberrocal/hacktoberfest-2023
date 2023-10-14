@@ -17,6 +17,8 @@ tasks:
   - source: scripts/s03_eda.py
     product:
       nb: products/03-eda.ipynb
+    params:
+      table_name: '{{dataset_name}}'
   - source: scripts/s04_transform.py
     product:
       nb: products/04-transform.ipynb

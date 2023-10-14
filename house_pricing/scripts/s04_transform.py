@@ -43,4 +43,12 @@ df[features] = autoscaler.fit_transform(df[features])
 
 
 # %%
-save_to_duckdb(df=df, table_name=transformed_table_name, db_path=upstream['database'])
+save_to_duckdb(df=df, table_name=transformed_table_name, db_path=upstream['s01_get']['database'])
+
+
+# %%
+import duckdb
+
+conn = duckdb.connect(upstream['s01_get']['database'])
+conn.sql('SHOW TABLES;')
+conn.close()
