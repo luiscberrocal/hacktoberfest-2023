@@ -33,17 +33,30 @@ transformed_table_name = None
 # your code here...
 db_file = upstream['s01_get']['database']
 df = get_dataframe(duckdb_file=db_file, table_name=table_name)
+# %%
+df.shape
+
+# %%
+X = df.drop(['median_house_value'], axis=1)
+y = df['median_house_value']
 
 # %%
 from sklearn.preprocessing import StandardScaler
 
-features =  df.columns # ["col1", "col2", "col3", "col4"]
+features = X.columns  # ["col1", "col2", "col3", "col4"]
 autoscaler = StandardScaler()
-df[features] = autoscaler.fit_transform(df[features])
-
+X[features] = autoscaler.fit_transform(X[features])
 
 # %%
-save_to_duckdb(df=df, table_name=transformed_table_name, db_path=upstream['s01_get']['database'])
+X = X.join(y)
+# %%
+X.shape
+
+# %%
+X.describe()
+
+# %%
+save_to_duckdb(df=X, table_name=transformed_table_name, db_path=upstream['s01_get']['database'])
 
 
 # %%
