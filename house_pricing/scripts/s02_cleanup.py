@@ -5,6 +5,8 @@
 #     language: python
 #     name: python3
 # ---
+import duckdb
+
 from src.db import get_dataframe, save_to_duckdb
 import re
 import seaborn as sns
@@ -66,4 +68,9 @@ sns.heatmap(df.corr(), annot=True, cmap='YlGnBu')
 plt.show()
 
 # %%
-save_to_duckdb(df=df, table_name=table_name, db_path=product['database'])
+save_to_duckdb(df=df, table_name=table_name, db_path=db_file)
+
+# %%
+
+conn = duckdb.connect(db_file)
+conn.sql(f'DESCRIBE {table_name};')
