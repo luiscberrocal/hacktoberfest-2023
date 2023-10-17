@@ -31,7 +31,9 @@ tasks:
   #     nb: products/05-split.ipynb
   #     train_data: data/house_prices_train.csv
   #     test_data: data/house_prices_test.csv
-  # - source: scripts/s06_linear_regressions.py
-  #   product:
-  #     nb: products/06-linear_regression.ipynb
-  #     model_file: data/linear_regression.pickle
+  - source: scripts/s05_regressions.py
+    product:
+      nb: products/05-linear_regression.ipynb
+      model_file: data/regression_model.pickle
+    params:
+      transformed_table_name: '{{dataset_name}}_transformed'
