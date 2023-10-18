@@ -4,6 +4,3 @@ clean: ## remove build artifacts
 run:
 	ploomber build
 
-r:
-	ploomber build --entry-point ./src/pipeline.h2.yaml
-
