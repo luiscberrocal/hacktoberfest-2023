@@ -5,5 +5,5 @@ r:
 	ploomber build
 
 run:
-	ploomber build --entry-point ./house_pricing/pipeline.h2.yaml
+	ploomber build --entry-point ./src/pipeline.h2.yaml
 
