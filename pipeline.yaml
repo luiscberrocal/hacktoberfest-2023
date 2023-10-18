@@ -1,27 +1,27 @@
 tasks:
-  - source: scripts/s01_get.py
+  - source: src/scripts/s01_get.py
     product:
-      nb: products/01-extract-pipeline.ipynb
-      csv_file: data/{{dataset_name}}_raw.csv
-      database: data/{{dataset_name}}.duckdb
+      nb: src/products/01-extract-pipeline.ipynb
+      csv_file: src/data/{{dataset_name}}_raw.csv
+      database: src/data/{{dataset_name}}.duckdb
     params:
       table_name: '{{dataset_name}}'
       kaggle_owner: '{{kaggle_owner}}'
       kaggle_dataset_name: '{{kaggle_dataset_name}}'
       kaggle_csv: '{{kaggle_csv}}'
-  - source: scripts/s02_cleanup.py
+  - source: src/scripts/s02_cleanup.py
     product:
-      nb: products/02-cleanup.ipynb
+      nb: src/products/02-cleanup.ipynb
     params:
       table_name: '{{dataset_name}}'
-  - source: scripts/s03_eda.py
+  - source: src/scripts/s03_eda.py
     product:
-      nb: products/03-eda.ipynb
+      nb: src/products/03-eda.ipynb
     params:
       table_name: '{{dataset_name}}'
-  - source: scripts/s04_transform.py
+  - source: src/scripts/s04_transform.py
     product:
-      nb: products/04-transform.ipynb
+      nb: src/products/04-transform.ipynb
       # transformed_csv: data/house_prices_transformed.csv
     params:
       table_name: '{{dataset_name}}'
@@ -31,9 +31,9 @@ tasks:
   #     nb: products/05-split.ipynb
   #     train_data: data/house_prices_train.csv
   #     test_data: data/house_prices_test.csv
-  - source: scripts/s05_regressions.py
+  - source: src/scripts/s05_regressions.py
     product:
-      nb: products/05-linear_regression.ipynb
-      model_file: data/regression_model.pickle
+      nb: src/products/05-linear_regression.ipynb
+      model_file: src/data/regression_model.pickle
     params:
       transformed_table_name: '{{dataset_name}}_transformed'
