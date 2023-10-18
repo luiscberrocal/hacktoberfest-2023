@@ -27,4 +27,4 @@ COPY . .
 EXPOSE 8000
 
 # Execute the script when the container starts
-CMD ["poetry", "run", "uvicorn", "app.app:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["poetry", "run", "uvicorn", "src.app.app:app", "--host", "0.0.0.0", "--port", "8000"]

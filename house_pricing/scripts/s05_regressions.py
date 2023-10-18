@@ -78,3 +78,6 @@ with open(model_file, 'wb') as f:
     pickle.dump(product['model_file'], f)
 
 print(f'Model file: {model_file} exists: {model_file.exists()}')
+
+# %%
+print('Test')
