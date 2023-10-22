@@ -26,14 +26,9 @@ tasks:
     params:
       table_name: '{{dataset_name}}'
       transformed_table_name: '{{dataset_name}}_transformed'
-  # - source: scripts/s05_split.py
-  #   product:
-  #     nb: products/05-split.ipynb
-  #     train_data: data/house_prices_train.csv
-  #     test_data: data/house_prices_test.csv
   - source: src/scripts/s05_regressions.py
     product:
-      nb: src/products/05-linear_regression.ipynb
+      nb: src/products/05-regression.ipynb
       model_file: src/data/regression_model.pickle
     params:
       transformed_table_name: '{{dataset_name}}_transformed'

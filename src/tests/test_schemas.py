@@ -2,7 +2,7 @@ from src.app.schema import House
 
 
 def test_create_house():
-    house_data = {
+    house_data_test = {
         'median_income': 3.87,
         "median_age": 28.6,
         "tot_rooms": 5,
@@ -17,6 +17,6 @@ def test_create_house():
         "distance_to_sanjose": 34_000.0,
         "distance_to_sanfrancisco": 346_000.0,
     }
-    house = House(**house_data)
+    house = House(**house_data_test)
 
     assert house
