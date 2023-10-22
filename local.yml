@@ -8,10 +8,9 @@ services:
     image: hactoberfest_2023_local_fastapi
     container_name: hactoberfest_2023_local_fastapi
     volumes:
-      - .:/src
+      - .:/app
     env_file:
       - ./.envs/environment_vars.txt
     ports:
       - "8000:8000"
-    # command: /start
 

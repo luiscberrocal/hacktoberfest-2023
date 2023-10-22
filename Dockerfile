@@ -21,10 +21,10 @@ RUN poetry install
 COPY . .
 
 # Extract data for app
-RUN poetry run ploomber build
+# RUN poetry run ploomber build
 
 # Expose the port that the app runs on
 EXPOSE 8000
 
 # Execute the script when the container starts
-CMD ["poetry", "run", "uvicorn", "app.app:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["poetry", "run", "uvicorn", "src.app.app:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]

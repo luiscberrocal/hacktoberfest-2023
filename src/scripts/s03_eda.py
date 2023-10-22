@@ -5,10 +5,11 @@
 #     language: python
 #     name: python3
 # ---
-import seaborn as sns
 import matplotlib.pyplot as plt
-from src.db import get_dataframe
 import pandas as pd
+
+from src.db import get_dataframe
+
 # Add description here
 #
 # *Note:* You can open this file as a notebook (JupyterLab: right-click on it in the side bar -> Open With -> Notebook)
@@ -47,7 +48,6 @@ plt.title('Box-plot of Features')
 plt.show()
 
 # %%
-from sklearn.model_selection import train_test_split
 X = df.drop(['median_house_value'], axis=1)
 y = df['median_house_value']
 
@@ -62,3 +62,6 @@ vif_df["VIF"] = [variance_inflation_factor(vif_x.values, i)
                  for i in range(len(vif_x.columns))]
 
 vif_df.head(10)
+
+# %%
+df.describe()

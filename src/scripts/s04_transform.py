@@ -44,7 +44,7 @@ y = df['median_house_value']
 # %%
 from sklearn.preprocessing import StandardScaler
 
-features = X.columns  # ["col1", "col2", "col3", "col4"]
+features = X.columns
 autoscaler = StandardScaler()
 X[features] = autoscaler.fit_transform(X[features])
 
