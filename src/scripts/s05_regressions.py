@@ -9,13 +9,16 @@ import pickle
 from pathlib import Path
 
 import numpy as np
+import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error as mae
 from sklearn.metrics import mean_squared_error as mse
 from sklearn.metrics import r2_score
 from sklearn.model_selection import train_test_split
 
+from src.app.schema import House
 from src.db import get_dataframe
+from src.handlers import transformation_handler
 
 # Add description here
 #
@@ -75,9 +78,47 @@ print(f'R2 : {r2_rfr:,.2f}')
 # %%
 model_file = Path(product['model_file'])
 with open(model_file, 'wb') as f:
-    pickle.dump(product['model_file'], f)
+    pickle.dump(rfr_model, f)
 
 print(f'Model file: {model_file} exists: {model_file.exists()}')
+# %%
+
+with open(model_file, 'rb') as f:
+    pickled_model = pickle.load(f)
+
 
 # %%
-print('Test')
+
+house_data_test = {
+    'median_income': 3.87,
+    "median_age": 28.6,
+    "tot_rooms": 5,
+    "tot_bedrooms": 3,
+    "population": 1425,
+    "households": 500,
+    "latitude": 35.6,
+    "longitude": -119.56,
+    "distance_to_coast": 40_509.3,
+    "distance_to_la": 269_422,
+    "distance_to_sandiego": 398_000,
+    "distance_to_sanjose": 34_000.0,
+    "distance_to_sanfrancisco": 346_000.0,
+}
+house = House(**house_data_test)
+
+# %%
+X_to_predict = pd.DataFrame.from_records([house.dict(exclude={'median_house_value'})])
+
+X_to_predict.head()
+
+# %%
+
+X_to_predict_t, scaler = transformation_handler(X_to_predict)
+
+X_to_predict_t.head()
+
+# %%
+# FIXME this is wrong need to scale first
+y_pred_pickled = pickled_model.predict(X_to_predict)
+
+print(y_pred_pickled)
