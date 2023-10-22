@@ -18,6 +18,7 @@ from sklearn.model_selection import train_test_split
 
 from src.app.schema import House
 from src.db import get_dataframe
+from src.handlers import transformation_handler
 
 # Add description here
 #
@@ -106,6 +107,18 @@ house_data_test = {
 house = House(**house_data_test)
 
 # %%
-X_to_predict = pd.DataFrame.from_records([house.dict()])
+X_to_predict = pd.DataFrame.from_records([house.dict(exclude={'median_house_value'})])
 
 X_to_predict.head()
+
+# %%
+
+X_to_predict_t, scaler = transformation_handler(X_to_predict)
+
+X_to_predict_t.head()
+
+# %%
+# FIXME this is wrong need to scale first
+y_pred_pickled = pickled_model.predict(X_to_predict)
+
+print(y_pred_pickled)
