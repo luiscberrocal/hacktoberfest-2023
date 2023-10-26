@@ -20,7 +20,7 @@ def main_end_point() -> House:
         "distance_to_la": 269_422,
         "distance_to_sandiego": 398_000,
         "distance_to_sanjose": 34_000.0,
-        "distance_to_sanfrancisco": 346_000.0,
+        "distance_to_sanfrancisco": 346_000.0
     }
     house = House(**house_data)
     return house
