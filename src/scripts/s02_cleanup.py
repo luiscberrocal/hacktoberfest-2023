@@ -27,7 +27,7 @@ import matplotlib.pyplot as plt
 # %% tags=["parameters"]
 # If this task has dependencies, list them them here
 # (e.g. upstream = ['some_task']), otherwise leave as None.
-upstream = ['s01_get']
+upstream = ["s01_get"]
 
 # This is a placeholder, leave it as None
 product = None
@@ -35,7 +35,7 @@ table_name = None
 
 # %%
 # your code here...
-db_file = upstream['s01_get']['database']
+db_file = upstream["s01_get"]["database"]
 df = get_dataframe(duckdb_file=db_file, table_name=table_name)
 
 # %%
@@ -47,8 +47,8 @@ df.info()
 # %%
 renamed_mapping = {}
 for c in df.columns:
-    new_c_name = re.sub('[^0-9a-zA-Z_]+', '', c)
-    renamed_mapping[c] = new_c_name.lower()  
+    new_c_name = re.sub("[^0-9a-zA-Z_]+", "", c)
+    renamed_mapping[c] = new_c_name.lower()
 
 df = df.rename(columns=renamed_mapping)
 
@@ -64,7 +64,7 @@ plt.show()
 
 # %%
 plt.figure(figsize=(18, 8))
-sns.heatmap(df.corr(), annot=True, cmap='YlGnBu')
+sns.heatmap(df.corr(), annot=True, cmap="YlGnBu")
 plt.show()
 
 # %%
@@ -73,4 +73,4 @@ save_to_duckdb(df=df, table_name=table_name, db_path=db_file)
 # %%
 
 conn = duckdb.connect(db_file)
-conn.sql(f'DESCRIBE {table_name};')
+conn.sql(f"DESCRIBE {table_name};")

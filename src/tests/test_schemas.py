@@ -3,7 +3,7 @@ from src.app.schema import House
 
 def test_create_house():
     house_data_test = {
-        'median_income': 3.87,
+        "median_income": 3.87,
         "median_age": 28.6,
         "tot_rooms": 5,
         "tot_bedrooms": 3,

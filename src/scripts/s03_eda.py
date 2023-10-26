@@ -25,7 +25,7 @@ from src.db import get_dataframe
 # %% tags=["parameters"]
 # If this task has dependencies, list them them here
 # (e.g. upstream = ['some_task']), otherwise leave as None.
-upstream = ['s01_get']
+upstream = ["s01_get"]
 
 # This is a placeholder, leave it as None
 product = None
@@ -34,7 +34,7 @@ table_name = None
 # %%
 
 # %%
-db_file = upstream['s01_get']['database']
+db_file = upstream["s01_get"]["database"]
 df = get_dataframe(duckdb_file=db_file, table_name=table_name)
 
 # %%
@@ -43,13 +43,13 @@ plt.tight_layout()
 plt.show()
 
 # %%
-df.plot(kind='box', subplots=True, layout=(4,4), figsize=(15,8))
-plt.title('Box-plot of Features')
+df.plot(kind="box", subplots=True, layout=(4, 4), figsize=(15, 8))
+plt.title("Box-plot of Features")
 plt.show()
 
 # %%
-X = df.drop(['median_house_value'], axis=1)
-y = df['median_house_value']
+X = df.drop(["median_house_value"], axis=1)
+y = df["median_house_value"]
 
 # %%
 # --Variance Inflation Factor
@@ -58,8 +58,9 @@ from statsmodels.stats.outliers_influence import variance_inflation_factor
 vif_df = pd.DataFrame()
 vif_x = X.copy()
 vif_df["feature"] = vif_x.columns
-vif_df["VIF"] = [variance_inflation_factor(vif_x.values, i)
-                 for i in range(len(vif_x.columns))]
+vif_df["VIF"] = [
+    variance_inflation_factor(vif_x.values, i) for i in range(len(vif_x.columns))
+]
 
 vif_df.head(10)
 

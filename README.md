@@ -55,6 +55,10 @@ Opciones:
 
 ## Team members/ Miembros del equipo
 
-Add the names and GitHub IDs of your team members here.
+Luis C. Berrocal
 
-Agregue los nombres y las ID de GitHub de los miembros de su equipo aquí.
+## Development
+
+http://127.0.0.1:8000/docs
+
+

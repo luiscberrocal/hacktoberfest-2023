@@ -163,12 +163,12 @@ cython_debug/
 *.csv
 *.xlsx
 *.xls
-*.json
+# *.json
 *.db
 *.duck.db 
 *.duckdb
 *.metadata
-*.json
+# *.json
 *.sqlite
 # Ignore everything in the products directory
 src/products/*
