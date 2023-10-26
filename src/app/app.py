@@ -5,10 +5,10 @@ from src.app.schema import House
 app = FastAPI()
 
 
-@app.get('/')
+@app.get("/")
 def main_end_point() -> House:
     house_data = {
-        'median_income': 3.87,
+        "median_income": 3.87,
         "median_age": 28.6,
         "tot_rooms": 5,
         "tot_bedrooms": 3,
@@ -25,7 +25,7 @@ def main_end_point() -> House:
     house = House(**house_data)
     return house
 
-@app.post('/predict')
+
+@app.post("/predict")
 def predict_house_price(house: House) -> House:
     return house
-

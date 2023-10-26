@@ -35,7 +35,7 @@ from src.handlers import transformation_handler
 # %% tags=["parameters"]
 # If this task has dependencies, list them them here
 # (e.g. upstream = ['some_task']), otherwise leave as None.
-upstream = ['s01_get']
+upstream = ["s01_get"]
 
 # This is a placeholder, leave it as None
 product = None
@@ -46,20 +46,20 @@ transformed_table_name = None
 
 # %%
 
-db_file = upstream['s01_get']['database']
+db_file = upstream["s01_get"]["database"]
 df = get_dataframe(duckdb_file=db_file, table_name=transformed_table_name)
 
 df.shape
 
 # %%
-X = df.drop(['median_house_value'], axis=1)
-y = df['median_house_value']
+X = df.drop(["median_house_value"], axis=1)
+y = df["median_house_value"]
 
 # %%
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # %%
-rfr_model = RandomForestRegressor(n_estimators = 30)
+rfr_model = RandomForestRegressor(n_estimators=30)
 
 rfr_model.fit(X_test, y_test)
 
@@ -67,30 +67,30 @@ rfr_model.fit(X_test, y_test)
 y_pred_rfr = rfr_model.predict(X_test)
 
 # %%
-mse_rfr = mse(y_test,y_pred_rfr)
-mae_rfr = mae(y_test,y_pred_rfr)
-r2_rfr = r2_score(y_test,y_pred_rfr)
+mse_rfr = mse(y_test, y_pred_rfr)
+mae_rfr = mae(y_test, y_pred_rfr)
+r2_rfr = r2_score(y_test, y_pred_rfr)
 
-print(f'RMSE: {np.sqrt(mse_rfr):,.2f}')
-print(f'MAE: {mae_rfr:,.2f}')
-print(f'R2 : {r2_rfr:,.2f}')
+print(f"RMSE: {np.sqrt(mse_rfr):,.2f}")
+print(f"MAE: {mae_rfr:,.2f}")
+print(f"R2 : {r2_rfr:,.2f}")
 
 # %%
-model_file = Path(product['model_file'])
-with open(model_file, 'wb') as f:
+model_file = Path(product["model_file"])
+with open(model_file, "wb") as f:
     pickle.dump(rfr_model, f)
 
-print(f'Model file: {model_file} exists: {model_file.exists()}')
+print(f"Model file: {model_file} exists: {model_file.exists()}")
 # %%
 
-with open(model_file, 'rb') as f:
+with open(model_file, "rb") as f:
     pickled_model = pickle.load(f)
 
 
 # %%
 
 house_data_test = {
-    'median_income': 3.87,
+    "median_income": 3.87,
     "median_age": 28.6,
     "tot_rooms": 5,
     "tot_bedrooms": 3,
@@ -107,7 +107,7 @@ house_data_test = {
 house = House(**house_data_test)
 
 # %%
-X_to_predict = pd.DataFrame.from_records([house.dict(exclude={'median_house_value'})])
+X_to_predict = pd.DataFrame.from_records([house.dict(exclude={"median_house_value"})])
 
 X_to_predict.head()
 

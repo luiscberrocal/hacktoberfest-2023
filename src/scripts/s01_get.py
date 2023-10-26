@@ -41,16 +41,18 @@ kaggle_csv = None
 # %%
 # your code here...
 configure_kaggle(settings.ENVS_FOLDER)
-data_folder = Path(product['csv_file']).parent
+data_folder = Path(product["csv_file"]).parent
 data_folder.mkdir(exist_ok=True)
-fldr = download_dataset(owner=kaggle_owner, dataset_name=kaggle_dataset_name, download_folder=data_folder)
-print(f'Data folder: {fldr}')
+fldr = download_dataset(
+    owner=kaggle_owner, dataset_name=kaggle_dataset_name, download_folder=data_folder
+)
+print(f"Data folder: {fldr}")
 csv_file = find_csv_file(fldr, kaggle_csv)
 df = pd.read_csv(csv_file)
-df.to_csv(product['csv_file'], index=False)
-save_to_duckdb(df=df, table_name=table_name, db_path=product['database'])
+df.to_csv(product["csv_file"], index=False)
+save_to_duckdb(df=df, table_name=table_name, db_path=product["database"])
 
-print(f'CSV: {csv_file}')
+print(f"CSV: {csv_file}")
 
 # %%
 df.head()
