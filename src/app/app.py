@@ -24,3 +24,8 @@ def main_end_point() -> House:
     }
     house = House(**house_data)
     return house
+
+@app.post('/predict')
+def predict_house_price(house: House) -> House:
+    return house
+
