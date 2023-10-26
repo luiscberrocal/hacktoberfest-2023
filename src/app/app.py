@@ -1,8 +1,15 @@
+import pickle
+from pathlib import Path
+
+import pandas as pd
 from fastapi import FastAPI
 
 from src.app.schema import House
 
 app = FastAPI()
+model_file = Path(__file__).parent.parent / 'data' / 'regression_model.pickle'
+with open(model_file, "rb") as f:
+    REGRESSION_MODEL = pickle.load(f)
 
 
 @app.get("/")
@@ -27,5 +34,7 @@ def main_end_point() -> House:
 
 
 @app.post("/predict")
-def predict_house_price(house: House) -> House:
-    return house
+def predict_house_price(house: House) -> float:
+    X_to_predict = pd.DataFrame.from_records([house.dict(exclude={"median_house_value"})])
+    y_pred_pickled = REGRESSION_MODEL.predict(X_to_predict)
+    return y_pred_pickled[0]
